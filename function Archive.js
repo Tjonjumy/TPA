@@ -141,7 +141,8 @@ function Validator (options) {
         });
         console.log(selectorRules);
          var submitElement = document.getElementById('send-mess');
-         // submit function
+	    
+         // dend message
          var dataInput={};
          submitElement.onclick = function(){
             var isOK = true;
