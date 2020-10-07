@@ -1,41 +1,33 @@
 ﻿
-/* function reponsive for Menu*/
-function open_menu(){
-    document.getElementById('layer2').style.left="0";  
+/* Action with Menu on mobile */
+var sideMenu=document.getElementById('layer2');
+var layer1=document.getElementById('layer1')
+function action_Menu(){
+    var sideMenuLeft=window.getComputedStyle(sideMenu).getPropertyValue('left');
+    if(sideMenuLeft=='-320px'){
+        sideMenu.style.left='0';        // Open Menu
+        layer1.style.display="block";
+    }
+    else{
+        console.log('bug here');
+        sideMenu.style.left='-320px';  // Close Menu
+        layer1.style.display="none";
+    }
 }
-function close_menu(){
-    document.getElementById('layer2').style.left="-320px";  
-}
-function open_layer(){
-    document.getElementById('layer1').style.display="block";  
-}
-function close_layer(){
-    document.getElementById('layer1').style.display="none";   
-}
-document.getElementById('idbar').addEventListener("click",open_menu);
-document.getElementById('idclose').addEventListener("click",close_menu);
 
-document.getElementById('idbar').addEventListener("click",open_layer);
-document.getElementById('layer1').addEventListener("click",close_menu);
-document.getElementById('layer1').addEventListener("click",close_layer);
-document.getElementById('idclose').addEventListener("click",close_layer);
+document.getElementById('idbar').addEventListener("click",action_Menu);
+document.getElementById('idclose').addEventListener("click",action_Menu);
+document.getElementById('layer1').addEventListener("click",action_Menu);
 
-/* Event Capturing 
-document.getElementById('layer2').addEventListener("click",close_menu,true);
-document.getElementById('layer2').addEventListener("click",close_layer,true); */
-
-/* close menu and layer when click item on menu */
+/* close menu and layer1 when click each item on menu */
 document.querySelectorAll('.rps ul li').forEach(item=>
-    {item.addEventListener("click",close_menu)});
-document.querySelectorAll('.rps ul li').forEach(item=>
-    {item.addEventListener("click",close_layer)});
+    {item.addEventListener("click",action_Menu)});
 
-    // Open-Close sub-menu course reponsive
-var rpsMenu=document.getElementsByClassName('rps-nav')[0];
-var rpsSubmenu = rpsMenu.getElementsByClassName('submenu-rps')[0];
-
-rpsSubmenu.parentElement.removeEventListener("click",close_menu);
-rpsSubmenu.parentElement.removeEventListener("click",close_layer);
+// Open-Close sub-menu course reponsive
+var rpsMenu=document.querySelector('.rps-nav');
+var rpsSubmenu = rpsMenu.querySelector('.submenu-rps');
+rpsSubmenu.parentElement.removeEventListener("click",action_Menu);
+rpsSubmenu.parentElement.removeEventListener("click",action_Menu);
 rpsSubmenu.parentElement.onclick =function(){
     if(rpsSubmenu .style.display=="block"){
         rpsSubmenu .style.display="none";
@@ -44,61 +36,43 @@ rpsSubmenu.parentElement.onclick =function(){
         rpsSubmenu .style.display="block";
     }
 }
-// silde bar 
-    let sliderBar=document.querySelectorAll('.slider-bar li');
-// Carousel Silder
-let carouselSlider=document.querySelector('.carousel-slider');
-let carouselImg=document.querySelectorAll('.carousel-slider a img');
-const size=carouselSlider.clientWidth;
-let distance=0;
 
+/* Carousel Silider */
+let sliderBar=document.querySelectorAll('.slider-bar li');
+let carouselContainer=document.querySelector('.slider-container');
+let sliders=document.querySelector('.sliders');
+let carouselImg=document.querySelectorAll('.sliders a img');
+const size=carouselContainer.clientWidth;
+sliders.style.width=`${size*carouselImg.length}px`;
+let idx=0;
+sliderBar[idx].style.background="red";
 function slide_next(){
-    if(distance==-2*size){ //
-        distance=size;
+    if(idx<carouselImg.length-1){
+        idx++;
     }
-    distance-=size;
-    
-    carouselSlider.style.transform='translateX('+ distance +'px)';
-    if(distance==0){
-        sliderBar[0].style.background="red";
-        sliderBar[1].style.background="#eee";
-        sliderBar[2].style.background="#eee";
+    else{
+        idx=0;
     }
-    if(distance==-size){
-        sliderBar[0].style.background="#eee";
-        sliderBar[1].style.background="red";
-        sliderBar[2].style.background="#eee";
+    sliders.style.transform=`translateX(${-idx*size}px)`;
+    for(let i=0;i<sliderBar.length;i++){
+        sliderBar[i].style.background="#eee";
     }
-    if(distance==-2*size){
-        sliderBar[0].style.background="#eee";
-        sliderBar[1].style.background="#eee";
-        sliderBar[2].style.background="red";
-    }
+    sliderBar[idx].style.background="red";  
 }
 function slide_back(){
-    if(distance==0){
-        distance=-3*size;
+    if(idx>0){
+        idx--;
     }
-    distance+=size;
-   // console.log(distance);
-    carouselSlider.style.transform='translateX('+ distance +'px)';
-    if(distance==0){
-        sliderBar[0].style.background="red";
-        sliderBar[1].style.background="#eee";
-        sliderBar[2].style.background="#eee";
+    else{
+        idx=carouselImg.length-1;
     }
-    if(distance==-size){
-        sliderBar[0].style.background="#eee";
-        sliderBar[1].style.background="red";
-        sliderBar[2].style.background="#eee";
+    sliders.style.transform=`translateX(${-idx*size}px)`;
+    for(let i=0;i<sliderBar.length;i++){
+        sliderBar[i].style.background="#eee";
     }
-    if(distance==-2*size){
-        sliderBar[0].style.background="#eee";
-        sliderBar[1].style.background="#eee";
-        sliderBar[2].style.background="red";
-    }
+    sliderBar[idx].style.background="red";  
 }
-let autoSlide = setInterval(slide_next,3000);
+let autoSlide = setInterval(slide_next,1500);
 function stop_slider(){
     clearInterval(autoSlide);
 }
@@ -108,14 +82,13 @@ document.getElementById('back-btn').addEventListener("click",stop_slider);
 document.getElementById('back-btn').addEventListener("click",slide_back);
 
 
-/* Vlidation form */
-
+/* Vlidation form  */
 function Validator (options) {
     var formElement=document.querySelector(options.form);// Lấy element của form cần validate
     var selectorRules = {};
     if(formElement){
         //console.log(options.rules);
-        // Lặp qua mỗi rule, lắng nghe và xử lí sự kiện
+        // Looping through each rule, listening and handling event
         options.rules.forEach(function(rule){
             var inputElement = formElement.querySelector(rule.selector);
             
@@ -169,7 +142,7 @@ function Validator (options) {
              }
          }      
 
-        // Hàm thực hiện validate
+        // function to validate
         function validate(rules,inputElement){
             //var errorOutput = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
             var errorOutput=inputElement.parentElement.querySelector(options.errorSelector);
@@ -191,10 +164,10 @@ function Validator (options) {
         }
     }
 }
-// Định nghĩa rule
-// Nguyên tắc của các rules:
-// 1. Khi có lỗi => Trả ra message lỗi
-// 2. Khi hợp lệ => Không trả ra cái gì cả (undefined)
+// Defines rule
+// Rules:
+// 1. when have Error => Return Error Message
+// 2. When valid => Return undefined)
 Validator.isRequired = function(selector,message){
     return {
         selector:selector, 
@@ -222,7 +195,7 @@ Validator.isPhone = function(selector,message){
         }
     }
 }
-// Đối tượng mong muốn
+// Target Object 
 Validator({
     form:'#form-1',
     formGroupSelector: '.form-group',
@@ -236,7 +209,7 @@ Validator({
             ]
 });
 
-// Close Alert-Box
+/* Close Alert-Box  */
 document.getElementById('closeAlertBox').onclick = function(){
     //document.getElementById('alert-box').style.display="none";
     document.getElementById('alert-box').style.top="150%";

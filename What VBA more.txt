@@ -1,0 +1,34 @@
+﻿                <h2>VBA có thể làm gì?</h2>
+                <p  >
+                    <i>
+                        VBA có thể giúp tự động hóa mọi thứ trong Excel.
+                        <br />
+                        VBA có thể giúp bạn tự định nghĩa các hàm trong Excel.
+                        <br />
+                        VBA có thể giúp bạn hành động khác nhau dựa vào dữ liệu khác nhau.
+                        <br />
+                        VBA có thể giúp bạn tạo giao diện trực quan.
+                        <br />
+                        VBA có thể giúp bạn vượt qua nhiều giới hạn.
+                        <br />
+                    </i>
+                </p>
+                <h2>Ai nên học VBA?</h2>
+                <p>
+                    <i>
+                        Thông thường thì VBA có 2 cấp độ:<br />
+                        Cấp độ #1: Là khả năng ghi Macro bằng trình ghi Macro. Và vận dụng một số chức năng cơ bản.<br />
+                        Cấp độ #2: Là khả năng lập trình, chỉnh sửa code bên trong VBA Editor.<br />
+                        Bất kỳ ai thường xuyên làm việc với Excel đều nên học sử dụng VBA để tối ưu hóa công việc của mình. <br />
+                        Thông thường, những đối tượng hay sử dụng VBA là:<br />
+                        <ul class="vba-orient">
+                            <li>Nhà phân tích dữ liệu</li>
+                            <li>Chủ doanh nghiệp</li>
+                            <li>Quản lý</li>
+                            <li>Kế toán</li>
+                            <li>Nhân sự</li>
+                            <li>Nhà khoa học</li>
+                            <li>Và những người đã được đào tạo về lập trình VBA</li>
+                        </ul>
+                    </i>
+                </p>

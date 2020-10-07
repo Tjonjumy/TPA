@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-<html><head>
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0, user-scalable=0">
 <meta name="keywords" content="VBA,TPA,VBA in Excel,Excel VBA,Lap trinh VBA trong Excel,tjonjumy">
@@ -62,15 +63,14 @@
     </div>
     <div id="demo"></div>
 
-    <section class="gallery">
+    <section class="carousel-slider">
         <div class="slider-container">
             <i id="back-btn" class="fa fa-angle-left" aria-hidden="true"></i>
             <i id="next-btn" class="fa fa-angle-right" aria-hidden="true"></i>
-            <div class="carousel-slider">
+            <div class="sliders">
                 <a href="#">
                     <img src="./img/slide 3.jpg" alt="my class" title="Học VBA cùng TPA">
-                </a>    
-                <a href="#">
+                </a><a href="#">
                     <img src="./img/slide 1.jpg" alt="my class" title="Học VBA cùng TPA">
                 </a>
                 <a href="#">
@@ -105,40 +105,9 @@
                         thao tác thủ công thành một nút bấm duy nhất.
                     </i>
                 </p>
-                <h2>VBA có thể làm gì?</h2>
-                <p  >
-                    <i>
-                        VBA có thể giúp tự động hóa mọi thứ trong Excel.
-                        <br />
-                        VBA có thể giúp bạn tự định nghĩa các hàm trong Excel.
-                        <br />
-                        VBA có thể giúp bạn hành động khác nhau dựa vào dữ liệu khác nhau.
-                        <br />
-                        VBA có thể giúp bạn tạo giao diện trực quan.
-                        <br />
-                        VBA có thể giúp bạn vượt qua nhiều giới hạn.
-                        <br />
-                    </i>
-                </p>
-                <h2>Ai nên học VBA?</h2>
-                <p>
-                    <i>
-                        Thông thường thì VBA có 2 cấp độ:<br />
-                        Cấp độ #1: Là khả năng ghi Macro bằng trình ghi Macro. Và vận dụng một số chức năng cơ bản.<br />
-                        Cấp độ #2: Là khả năng lập trình, chỉnh sửa code bên trong VBA Editor.<br />
-                        Bất kỳ ai thường xuyên làm việc với Excel đều nên học sử dụng VBA để tối ưu hóa công việc của mình. <br />
-                        Thông thường, những đối tượng hay sử dụng VBA là:<br />
-                        <ul class="vba-orient">
-                            <li>Nhà phân tích dữ liệu</li>
-                            <li>Chủ doanh nghiệp</li>
-                            <li>Quản lý</li>
-                            <li>Kế toán</li>
-                            <li>Nhân sự</li>
-                            <li>Nhà khoa học</li>
-                            <li>Và những người đã được đào tạo về lập trình VBA</li>
-                        </ul>
-                    </i>
-                </p>
+               <div id="ajax-what-vba">
+                    <button style="background:green;outline:none;padding:5px 15px;font-size:15px;border-radius:5px;border:none;cursor:pointer;color:#fff" type="button" onclick="loadDoc()">More</button>
+                </div>
             </div>
             
             <div class="video-demo">
@@ -304,7 +273,20 @@
         </ul>
     </div> 
     
-
+   <script>
+        //creat XMLHttpRequest and retrieve data from TXT file by AJAX
+        function loadDoc() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("ajax-what-vba").innerHTML =
+              this.responseText;
+            }
+          };
+          xhttp.open("GET", "What_VBA_more.txt", true);
+          xhttp.send();
+        }
+    </script>
    <script type="text/javascript" src="./function Archive.js"></script>
   
 </body>
